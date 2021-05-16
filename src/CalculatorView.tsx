@@ -1,10 +1,20 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
+import CalculatorButtons from './CalculatorButtons'
+import Display from './Display'
 
 export default function CalculatorView() {
     return (
-        <View>
-            <Text></Text>
+        <View style={styles.calculatorView}>
+            <Display />
+            <CalculatorButtons />
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+  calculatorView: {
+    flex: 1,
+    backgroundColor: '#000',
+  },
+});
