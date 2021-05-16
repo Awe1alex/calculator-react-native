@@ -4,9 +4,10 @@ import { StyleSheet, View, Text, ScrollView } from 'react-native'
 type DisplayProps = {
 	main: string
 	secondary: string
+	operation: string | null
 }
 
-const Display = ({ main, secondary }: DisplayProps) => {
+const Display = ({ main, secondary, operation }: DisplayProps) => {
 	const secondaryWrapperRef = useRef<ScrollView>(null)
 	const mainWrapperRef = useRef<ScrollView>(null)
 
@@ -19,7 +20,11 @@ const Display = ({ main, secondary }: DisplayProps) => {
 				showsHorizontalScrollIndicator={false}
 				onContentSizeChange={() => secondaryWrapperRef.current?.scrollToEnd({ animated: false })}
 			>
-				<Text style={styles.secondary}>{secondary}</Text>
+				{operation && (
+					<Text style={styles.secondary}>
+						{secondary} {operation}
+					</Text>
+				)}
 			</ScrollView>
 			<ScrollView
 				ref={mainWrapperRef}
@@ -47,9 +52,9 @@ const styles = StyleSheet.create({
 		justifyContent: 'flex-end'
 	},
 	secondary: {
-		paddingHorizontal: 20,
-		paddingTop: 20,
-		fontSize: 25,
+		paddingHorizontal: 30,
+		paddingTop: 50,
+		fontSize: 30,
 		color: '#ffffffaa'
 	},
 	mainWrapper: {
@@ -59,8 +64,8 @@ const styles = StyleSheet.create({
 	},
 	main: {
 		color: '#fff',
-		fontSize: 32,
-		padding: 20
+		fontSize: 40,
+		padding: 30
 	}
 })
 
