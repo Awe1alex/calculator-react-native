@@ -1,11 +1,35 @@
-import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import React, { useRef } from 'react'
+import { StyleSheet, View, Text, ScrollView } from 'react-native'
 
-export default function Display() {
+type DisplayProps = {
+	main: string
+	secondary: string
+}
+
+export default function Display({ main, secondary }: DisplayProps) {
+	const secondaryWrapperRef = useRef<ScrollView>(null)
+	const mainWrapperRef = useRef<ScrollView>(null)
+
 	return (
 		<View style={styles.display}>
-			<Text style={styles.result}>0</Text>
-			<Text style={styles.calculation}>0</Text>
+			<ScrollView
+				ref={secondaryWrapperRef}
+				horizontal={true}
+				contentContainerStyle={styles.secondaryWrapper}
+				showsHorizontalScrollIndicator={false}
+				onContentSizeChange={() => secondaryWrapperRef.current?.scrollToEnd({ animated: false })}
+			>
+				<Text style={styles.secondary}>{secondary}</Text>
+			</ScrollView>
+			<ScrollView
+				ref={mainWrapperRef}
+				horizontal={true}
+				contentContainerStyle={styles.mainWrapper}
+				showsHorizontalScrollIndicator={false}
+				onContentSizeChange={() => mainWrapperRef.current?.scrollToEnd({ animated: false })}
+			>
+				<Text style={styles.main}>{main}</Text>
+			</ScrollView>
 		</View>
 	)
 }
@@ -17,10 +41,25 @@ const styles = StyleSheet.create({
 		justifyContent: 'flex-end',
 		backgroundColor: '#101010'
 	},
-	calculation: {
-		color: '#fff'
+	secondaryWrapper: {
+		flexGrow: 1,
+		alignItems: 'center',
+		justifyContent: 'flex-end'
 	},
-	result: {
-		color: '#fff'
+	secondary: {
+		paddingHorizontal: 20,
+		paddingTop: 20,
+		fontSize: 25,
+		color: '#ffffffaa'
+	},
+	mainWrapper: {
+		flexGrow: 1,
+		alignItems: 'center',
+		justifyContent: 'flex-end'
+	},
+	main: {
+		color: '#fff',
+		fontSize: 32,
+		padding: 20
 	}
 })
