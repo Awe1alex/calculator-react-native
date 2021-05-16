@@ -40,8 +40,6 @@ export default function CalculatorView() {
 			}
 		} else {
 			setMain('0')
-			// TO-DO clear secondary if main is already 0
-			// setOperation(null)
 		}
 	}
 
@@ -109,7 +107,5 @@ const styles = StyleSheet.create({
 	calculatorView: {
 		flex: 1,
 		backgroundColor: '#000'
-		// TO-DO test on real phone
-		// paddingTop: Platform.OS === 'android' ? 40 : 0
 	}
 })
