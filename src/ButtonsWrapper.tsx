@@ -2,6 +2,12 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { CalculateButton, NumericButton, OperationButton } from './CalculatorButtons'
 
+type ButtonsWrapperProps = {
+	addNumeric: Function
+	addOperation: Function
+	calculate: Function
+}
+
 const numericKeyboard = [
 	['7', '8', '9'],
 	['4', '5', '6'],
@@ -11,9 +17,9 @@ const numericKeyboard = [
 
 const operationsKeyboard = ['÷', '×', '-', '+']
 
-export default function ButtonsWrapper() {
+const ButtonsWrapper = ({ addNumeric, addOperation, calculate }: ButtonsWrapperProps) => {
 	const buttonsRender = numericKeyboard.map(buttonRow => {
-		const buttons = buttonRow.map(buttonText => <NumericButton key={buttonText} text={buttonText}></NumericButton>)
+		const buttons = buttonRow.map(buttonText => <NumericButton key={buttonText} text={buttonText} onPress={addNumeric}></NumericButton>)
 
 		return (
 			<View style={styles.numericRow} key={buttonRow.join('')}>
@@ -27,9 +33,9 @@ export default function ButtonsWrapper() {
 			<View style={styles.numericKeyboard}>{buttonsRender}</View>
 			<View style={styles.operationsKeyboard}>
 				{operationsKeyboard.map(operation => (
-					<OperationButton key={operation} text={operation} />
+					<OperationButton key={operation} text={operation} onPress={addOperation} />
 				))}
-				<CalculateButton />
+				<CalculateButton text={'='} onPress={calculate} />
 			</View>
 		</View>
 	)
@@ -51,3 +57,5 @@ const styles = StyleSheet.create({
 		flex: 1
 	}
 })
+
+export default ButtonsWrapper

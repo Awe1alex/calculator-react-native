@@ -6,7 +6,7 @@ type DisplayProps = {
 	secondary: string
 }
 
-export default function Display({ main, secondary }: DisplayProps) {
+const Display = ({ main, secondary }: DisplayProps) => {
 	const secondaryWrapperRef = useRef<ScrollView>(null)
 	const mainWrapperRef = useRef<ScrollView>(null)
 
@@ -63,3 +63,5 @@ const styles = StyleSheet.create({
 		padding: 20
 	}
 })
+
+export default Display

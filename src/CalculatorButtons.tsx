@@ -3,28 +3,29 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
 type CalculatorButtonProps = {
 	text: string
+	onPress: Function
 }
 
-export const NumericButton = ({ text }: CalculatorButtonProps) => {
+export const NumericButton = ({ text, onPress }: CalculatorButtonProps) => {
 	return (
-		<TouchableOpacity style={styles.numericButton}>
+		<TouchableOpacity style={styles.numericButton} onPress={() => onPress(text)}>
 			<Text style={styles.buttonText}>{text}</Text>
 		</TouchableOpacity>
 	)
 }
 
-export const OperationButton = ({ text }: CalculatorButtonProps) => {
+export const OperationButton = ({ text, onPress }: CalculatorButtonProps) => {
 	return (
-		<TouchableOpacity style={styles.operationButton}>
+		<TouchableOpacity style={styles.operationButton} onPress={() => onPress(text)}>
 			<Text style={styles.buttonText}>{text}</Text>
 		</TouchableOpacity>
 	)
 }
 
-export const CalculateButton = () => {
+export const CalculateButton = ({ text, onPress }: CalculatorButtonProps) => {
 	return (
-		<TouchableOpacity style={styles.calculateButton}>
-			<Text style={styles.buttonText}>{'='}</Text>
+		<TouchableOpacity style={styles.calculateButton} onPress={() => onPress()}>
+			<Text style={styles.buttonText}>{text}</Text>
 		</TouchableOpacity>
 	)
 }
