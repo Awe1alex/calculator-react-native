@@ -13,7 +13,7 @@ export default function CalculatorView() {
 			deleteLast()
 			return
 		}
-		if (symbol === '0' && main.split('')[0] === '0') {
+		if (symbol === '0' && main === '0') {
 			return
 		}
 		if (symbol === '.' && main.includes('.')) {
@@ -22,7 +22,12 @@ export default function CalculatorView() {
 
 		setMain(state => {
 			const stateNum = parseFloat(state)
-			if (stateNum !== 0 && stateNum !== Infinity && !isNaN(stateNum)) {
+
+			if (symbol === '.') {
+				return state + symbol
+			} else if (state.split('')[1] === '.') {
+				return state + symbol
+			} else if (stateNum !== 0 && stateNum !== Infinity && !isNaN(stateNum)) {
 				return state + symbol
 			} else {
 				return symbol
